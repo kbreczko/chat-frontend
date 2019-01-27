@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MessageData} from './modules';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'chat';
+  public message: MessageData;
+  public messages: MessageData[];
+
+  constructor() {
+    this.message = new MessageData('', 'example', new Date());
+    this.messages = [
+      new MessageData('Welcome to chatbot universe', 'bot', new Date())
+    ];
+  }
 }
