@@ -22,7 +22,9 @@ export class MessageFormComponent implements OnInit {
   }
 
   public sendMessage(): void {
-    this.messageService.send(this.message);
-    this.message = new MessageForm('', this.message.user);
+    if (this.message.content !== '') {
+      this.messageService.send(this.message);
+      this.message = new MessageForm('', this.message.user);
+    }
   }
 }
