@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backend: 'http://localhost:8081'
+  backend: 'https://kbreczko-chat-backend.herokuapp.com'
 };
