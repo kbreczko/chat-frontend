@@ -1,5 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div  class="chatform">
-  <app-message-list [messages]="messages"></app-message-list>
-  <app-message-form [message]="message" [messages]="messages"></app-message-form>
+<div class="container mt-4">
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <span class="text-muted">You are {{message.user}}</span>
+    <div class="border px-3 py-3 overflow-auto" style="max-height: 400px; height: 400px">
+      <app-message-list [messages]="messages"> </app-message-list>
+    </div>
+    <div class="mt-4">
+      <app-message-form [message]="message" [messages]="messages"></app-message-form>
+    </div>
+  </div>
 </div>
