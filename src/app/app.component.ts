@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
-import {MessageData} from './modules';
-import {environment} from '../environments/environment';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+import {MessageData, MessageForm} from './modules';
 import * as Uuid from 'uuid';
+import {MessageService} from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -11,26 +9,15 @@ import * as Uuid from 'uuid';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private stompClient;
-  public message: MessageData;
+  public message: MessageForm;
   public messages: MessageData[];
 
-  constructor() {
-    this.initializeWebSocketConnection();
-    this.message = new MessageData('', 'guest' + Uuid.v4(), new Date());
+  constructor(private messageService: MessageService) {
+    this.message = new MessageForm('', 'guest' + Uuid.v4());
     this.messages = [
       new MessageData('Welcome to chat universe', 'bot', new Date())
     ];
-  }
 
-  private initializeWebSocketConnection() {
-    const socket = new SockJS(environment.backend + '/socket');
-    this.stompClient = Stomp.over(socket);
-    const that = this;
-    this.stompClient.connect(
-      {},
-      () => that.stompClient.subscribe('/chat', (message) => that.messages.push(JSON.parse(message.body))),
-      (error) => console.log(`error: ${error}`)
-    );
+    this.messageService.initializeWebSocketConnection(this.messages);
   }
 }

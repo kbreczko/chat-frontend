@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MessageData} from '../../modules';
+import {MessageData, MessageForm} from '../../modules';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-message-form',
@@ -9,21 +10,19 @@ import {MessageData} from '../../modules';
 export class MessageFormComponent implements OnInit {
 
   @Input('message')
-  private message: MessageData;
+  private message: MessageForm;
 
   @Input('messages')
   private messages: MessageData[];
 
-  constructor() {
+  constructor(private messageService: MessageService) {
   }
 
   ngOnInit() {
   }
 
   public sendMessage(): void {
-    this.messages.push(this.message);
-
-    this.message = new MessageData('', 'example', new Date());
+    this.messageService.send(this.message);
+    this.message = new MessageForm('', this.message.user);
   }
-
 }
