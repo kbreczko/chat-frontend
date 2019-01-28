@@ -10,10 +10,10 @@ import {MessageService} from '../../services/message.service';
 export class MessageFormComponent implements OnInit {
 
   @Input('message')
-  private message: MessageForm;
+  message: MessageForm;
 
   @Input('messages')
-  private messages: MessageData[];
+  messages: MessageData[];
 
   constructor(private messageService: MessageService) {
   }
