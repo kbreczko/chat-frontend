@@ -13,7 +13,7 @@ export class AppComponent {
   public messages: MessageData[];
 
   constructor(private messageService: MessageService) {
-    this.message = new MessageForm('', 'guest' + Uuid.v4());
+    this.message = new MessageForm('', 'guest-' + Uuid.v1().substring(0,8));
     this.messages = [
       new MessageData('Welcome to chat universe', 'bot', new Date())
     ];
